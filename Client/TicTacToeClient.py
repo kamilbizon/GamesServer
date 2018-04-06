@@ -30,16 +30,21 @@ class Client:
     def parse(self, data):
 
         flag = data.decode('utf-8')[0:2]
-        print(flag)
 
-        if flag == 'WE':
+        if flag == 'FI':
+            player = data.decode('utf-8')[-1]
+            self._outputCon.first(player)
+        elif flag == 'SC':
+            player = data.decode('utf-8')[-1]
+            self._outputCon.second(player)
+        elif flag == 'WE':
             self._outputCon.welcome()
         elif flag == 'DB':
             board = json.loads(data[2:-1])
             self._outputCon.draw_board(board, dim)
         elif flag == 'GM':
             coord = self._inputCon.get_player_move(dim)
-            self.s.send(bytes(coord, 'utf-8'))
+            self.s.send(bytes(str(coord), 'utf-8'))
         elif flag == 'PM':
             player = data.decode('utf-8')[-1]
             self._outputCon.player_move(player)

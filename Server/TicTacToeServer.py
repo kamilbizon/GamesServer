@@ -22,13 +22,14 @@ class Server(Input, Output):
             print("wait for client")
             self._conn, addr = s.accept()
             self._player_list.append(TicTacToePlayers(addr, self.TCP_PORT, 'Player' + str(len(self._player_list)), self._conn))
-            # data = self._conn.recv(BUFFER_SIZE)
-            # print(addr, self._conn, json.loads(data.decode("utf-8")))
-        # self._conn, addr = s.accept()
-        # while True:
-        #     self._conn.sendall(b'siema')
-        #     time.sleep(1)
+
         s.close()
+
+    def change_conn(self):
+        if self._conn == self._player_list[0].conn:
+            self._conn = self._player_list[1].conn
+        else:
+            self._conn = self._player_list[0].conn
 
     def first_second(self, player1, player2):
         self._player_list[1].conn.sendall(b'FI' + bytes(player1, 'utf-8'))
@@ -38,14 +39,12 @@ class Server(Input, Output):
 
     def get_player_move(self, dim):
         self._conn.sendall(b'GM')
-        print("kappa")
         try:
             coord = int(self._conn.recv(10))
-            print("mleko")
         except ValueError:
             return False
 
-        if 0 < coord < dim:
+        if 1 <= coord <= dim:
             return coord
 
         return False

@@ -83,4 +83,6 @@ class Game:
             self._server.announce_draw()
             is_end = True
 
+        self._server.change_conn()
+
         return is_end

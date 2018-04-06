@@ -2,6 +2,12 @@ from Output import Output
 
 class ConsoleOutput(Output):
 
+    def first(self, player):
+        print("You are {} player, you are first".format(player))
+
+    def second(self, player):
+        print("You are {} player, you are second".format(player))
+
     def welcome(self):
         print("Welcome in TicTacToe!")
 
