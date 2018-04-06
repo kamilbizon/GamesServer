@@ -11,10 +11,10 @@ class Client:
         self._outputCon = ConsoleOutput()
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect(('127.0.0.1', 5005))
+        self.s.settimeout(None)
         self.listen()
 
     def listen(self):
-        self.s.settimeout(100)
 
         data = None
         try:
@@ -23,9 +23,6 @@ class Client:
                 self.parse(data)
         except:
             pass
-
-    def send(self):
-        pass
 
     def parse(self, data):
 
@@ -59,8 +56,10 @@ class Client:
         elif flag == 'CW':
             winner = data.decode('utf-8')[-1]
             self._outputCon.congratulate_winner(winner)
+            self.s.close()
         elif flag == 'DR':
             self._outputCon.announce_draw()
+            self.s.close()
 
         self.listen()
 
