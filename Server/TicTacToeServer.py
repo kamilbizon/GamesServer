@@ -78,7 +78,6 @@ class Server(Input, Output):
     def draw_board(self, board, dim):
         self._player_list[1].conn.sendall(b'DB' + bytes(json.dumps(board), 'utf-8') + bytes(str(dim), 'utf-8'))
         self._player_list[0].conn.sendall(b'DB' + bytes(json.dumps(board), 'utf-8') + bytes(str(dim), 'utf-8'))
-        # self._conn.sendall(bytes(json.dumps(board), 'utf-8'))# + bytes(dim, 'utf-8'))
         sleep(0.1)
 
     def player_move(self, player):
