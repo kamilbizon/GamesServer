@@ -1,6 +1,8 @@
-class ConsoleInput:
+from Input import Input
 
-    def player_move(self, dim):
+class ConsoleInput(Input):
+
+    def get_player_move(self, dim):
         coord = input()
 
         try:
@@ -8,12 +10,9 @@ class ConsoleInput:
         except ValueError:
             return False
 
-        if 1 <= coord and coord <= dim:
-            return coord
+        return coord
 
-        return False
-
-    def board_size(self):
+    def get_board_size(self):
         size = input()
 
         try:
@@ -21,7 +20,4 @@ class ConsoleInput:
         except ValueError:
             return False
 
-        if size >= 3:
-            return size
-
-        return False
+        return size

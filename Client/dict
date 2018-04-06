@@ -1,0 +1,28 @@
+get_player_move
+S-->C b'GM'
+S<--C b'gm' + bytes(coord, 'ascii')
+welcome
+S-->C b'WE'
+draw_board
+S-->C b'DB' + json.dumps(board) + bytes(dim, 'ascii')
+player_move
+S-->C b'PM' + bytes(player, 'ascii')
+get_coord
+S-->C b'GC' + bytes(coord, 'ascii')
+wrong_coord
+S-->C b'WC' + bytes(dim, 'ascii')
+wrong_move
+S-->C b'WM'
+congratulate_winner
+S-->C b'CW' + bytes(winner, 'ascii')
+announce_draw
+S-->C b'DR'
+
+
+get_board_size
+S-->C b'GS'
+S<--C b'gs' + bytes(size, 'ascii')
+ask_board_size
+S-->C b'AS'
+wrong_size
+S-->C b'WS'

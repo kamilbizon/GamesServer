@@ -1,6 +1,5 @@
 from unittest import TestCase
-from TicTacToeBoard import TicTacToeBoard
-from ConsoleOutput import ConsoleOutput
+from Server.TicTacToeBoard import TicTacToeBoard
 
 dim = 607     # you can change this value to check any board size >= 3
 
@@ -27,13 +26,13 @@ class TestTicTacToeBoard(TestCase):
             board.set_point(i, 0, 'X')
         self.assertTrue(board.is_over())
 
-    def test_is_over_return_true_for_diagonal1_win(self):
+    def test_is_over_return_true_for_first_diagonal1_win(self):
         board = TicTacToeBoard(dim)
         for i in range(board.get_dim()):
             board.set_point(i, i, 'X')
         self.assertTrue(board.is_over())
 
-    def test_is_over_return_true_for_diagonal1_win(self):
+    def test_is_over_return_true_for_second_diagonal1_win(self):
         board = TicTacToeBoard(dim)
         for i in range(board.get_dim()):
             board.set_point(-i, -i, 'X')

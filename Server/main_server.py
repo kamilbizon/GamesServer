@@ -1,4 +1,4 @@
-from game_online import Game
+from Server.game_online import Game
 
 
 def main():

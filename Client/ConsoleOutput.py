@@ -1,4 +1,6 @@
-class ConsoleOutput:
+from Output import Output
+
+class ConsoleOutput(Output):
 
     def welcome(self):
         print("Welcome in TicTacToe!")
