@@ -99,8 +99,10 @@ class Server(Input, Output):
 
     def congratulate_winner(self, winner):
         self._conn.sendall(b'CW' + bytes(winner, 'utf-8'))
-        sleep(0.1)
+        self._player_list[1].conn.close()
+        self._player_list[0].conn.close()
 
     def announce_draw(self):
         self._conn.sendall(b'DR')
-        sleep(0.1)
+        self._player_list[1].conn.close()
+        self._player_list[0].conn.close()
