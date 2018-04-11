@@ -108,10 +108,13 @@ class Server(Input, Output):
         self._player_list[0].conn.close()
 
     def get_min_range(self):
-        pass
+        self._player_list[0].conn.sendall(b'GMI')
+        self._player_list[1].conn.sendall(b'GMI')
 
     def get_max_range(self):
-        pass
+        self._player_list[0].conn.sendall(b'GMA')
+        self._player_list[1].conn.sendall(b'GMA')
 
     def get_guess(self):
-        pass
+        self._player_list[0].conn.sendall(b'GG')
+        self._player_list[1].conn.sendall(b'GG')
