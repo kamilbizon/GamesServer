@@ -106,3 +106,12 @@ class Server(Input, Output):
         self._conn.sendall(b'DR')
         self._player_list[1].conn.close()
         self._player_list[0].conn.close()
+
+    def get_min_range(self):
+        pass
+
+    def get_max_range(self):
+        pass
+
+    def get_guess(self):
+        pass
