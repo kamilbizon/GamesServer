@@ -17,6 +17,7 @@ class MoreLessOnline:
         self._num_to_guess = randrange(self._min, self._max + 1)
 
         is_over = False
+
         while not is_over:
             first_guess = self._server.get_guess()
             second_guess = self._server.get_guess()
