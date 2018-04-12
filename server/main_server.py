@@ -1,5 +1,5 @@
 from server.TicTacToeGameOnline import TicTacToeGame
-from server.MoreLessGame import MoreLessGame
+from server.MoreLessOnline import MoreLessGame
 from server.Server import Server
 from Message import OnlineMessage
 
