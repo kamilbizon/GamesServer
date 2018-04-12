@@ -1,7 +1,6 @@
 class Players:
 
-    def __init__(self, addr, port, name, conn):
-        self.addr = addr
-        self.port = port
+    def __init__(self, address, name, conn):
+        self.address = address
         self.name = name
         self.conn = conn
