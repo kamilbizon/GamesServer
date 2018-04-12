@@ -1,5 +1,5 @@
-from Client.ConsoleInput import ConsoleInput
-from Client.ConsoleOutput import ConsoleOutput
+from client.ConsoleInput import ConsoleInput
+from client.ConsoleOutput import ConsoleOutput
 import socket
 import json
 

@@ -1,4 +1,4 @@
-from Client.TicTacToeClient import Client
+from client.TicTacToeClient import Client
 
 def main():
     client = Client()

@@ -1,8 +1,8 @@
 from random import randrange
-from Server.TicTacToeServer import Server
+from server.TicTacToeTCP import Server
 
 
-class MoreLessOnline:
+class MoreLessGame:
     def __init__(self):
         self._min = 0
         self._max = 0

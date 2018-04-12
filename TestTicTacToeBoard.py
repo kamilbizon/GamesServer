@@ -1,5 +1,5 @@
 from unittest import TestCase
-from Server.TicTacToeBoard import TicTacToeBoard
+from server.TicTacToeBoard import TicTacToeBoard
 
 dim = 607     # you can change this value to check any board size >= 3
 

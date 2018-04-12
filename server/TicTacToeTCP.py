@@ -1,16 +1,15 @@
 from time import sleep
 from Input import Input
 from Output import Output
-from Server.TicTacToePlayers import TicTacToePlayers
-from Server import Server
+from server import Server
 from Message import OnlineMessage
-
 
 
 class TicTacToeTCP(Input, Output):
 
     def __init__(self, server):
-        self.server = server
+        self._server = server
+        self._player_list = self._server.get_player_list()
 
     def change_conn(self):
         if self._conn == self._player_list[0].conn:
@@ -23,11 +22,10 @@ class TicTacToeTCP(Input, Output):
         self._player_list[0].conn.sendall(b'SC' + bytes(player2, 'utf-8'))
         sleep(0.1)
 
-
     def get_player_move(self, dim):
-        message = OnlineMessage('GM').encode()
-        self.server.sent(message)
-        message = message.decode(self.server.get())
+        message = OnlineMessage('GM')
+        self._server.sent(message.encode())
+        message = message.decode(self._server.get())
         try:
             coord = message[1]
         except ValueError:
