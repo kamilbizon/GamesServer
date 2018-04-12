@@ -2,28 +2,15 @@ from time import sleep
 from Input import Input
 from Output import Output
 from Server.TicTacToePlayers import TicTacToePlayers
-import socket
-import json
+from Server import Server
+from Message import OnlineMessage
 
 
-class Server(Input, Output):
 
-    def __init__(self):
-        self.TCP_IP = '127.0.0.1'
-        self.TCP_PORT = 5005
-        BUFFER_SIZE = 512
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind((self.TCP_IP, self.TCP_PORT))
+class TicTacToeTCP(Input, Output):
 
-        s.listen(2)
-        self._player_list = []
-
-        while len(self._player_list) < 2:
-            print("wait for client")
-            self._conn, addr = s.accept()
-            self._player_list.append(TicTacToePlayers(addr, self.TCP_PORT, 'Player' + str(len(self._player_list)), self._conn))
-
-        s.close()
+    def __init__(self, server):
+        self.server = server
 
     def change_conn(self):
         if self._conn == self._player_list[0].conn:
@@ -38,9 +25,11 @@ class Server(Input, Output):
 
 
     def get_player_move(self, dim):
-        self._conn.sendall(b'GM')
+        message = OnlineMessage('GM').encode()
+        self.server.sent(message)
+        message = message.decode(self.server.get())
         try:
-            coord = int(self._conn.recv(10))
+            coord = message[1]
         except ValueError:
             return False
 

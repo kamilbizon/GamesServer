@@ -10,7 +10,12 @@ class Client:
         self._inputCon = ConsoleInput()
         self._outputCon = ConsoleOutput()
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect(('127.0.0.1', 5005))
+        try:
+           self.s.connect(('127.0.0.1', 5005))
+        except ConnectionRefusedError:
+            print("Nie można połączyć się z serverem")
+            exit()
+
         self.s.settimeout(None)
         self.listen()
 
