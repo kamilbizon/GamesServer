@@ -6,14 +6,15 @@ from Message import OnlineMessage
 
 def ask_game(server):
     server.connect_player()
+    player = server.get_player_list()
     message = OnlineMessage('AG')
-    server.sent(message.encode())
-    message.decode(server.get())
+    server.sent(message.encode(), player[0])
+    message.decode(server.get(player[0]))
 
     while message.get_header() not in ['TIC', 'ML']:
         message.set_header('WG')
-        server.sent(message.encode())
-        message.decode(server.get())
+        server.sent(message.encode(), player[0])
+        message.decode(server.get(player[0]))
 
     if message.get_header() == 'TIC':
         server.connect_player()

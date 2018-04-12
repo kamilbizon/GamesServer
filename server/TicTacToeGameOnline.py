@@ -25,8 +25,6 @@ class TicTacToeGame:
         self._actual_player = players[0]
         second_player = players[1]
 
-        print(self._actual_player, second_player)
-
         self._TCP.first_second(self._actual_player, second_player)
 
     def start_game(self):
