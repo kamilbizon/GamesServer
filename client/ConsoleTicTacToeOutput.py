@@ -28,8 +28,7 @@ class ConsoleTicTacToeOutput(TicTacToeOutput):
                     print(''.join(board[i][j]), '|', end='')
                 else:
                     print(''.join(board[i][j]))
-        else:
-            return True
+        print()
 
     def player_move(self, player = 0):
         print("Player", player, "move")

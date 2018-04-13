@@ -16,14 +16,14 @@ class TicTacToeClient:
     def listen(self):
 
         data = None
-        message = None
         try:
-            while data != b'':
+            while data == None:
                 data = self.sock.recv(512)
         except:
-            print("exc")
+            pass
 
-        message = OnlineMessage().decode(data)
+        message = OnlineMessage()
+        message.decode(data)
         self.parse(message)
 
     def parse(self, message):
@@ -45,10 +45,8 @@ class TicTacToeClient:
             message = OnlineMessage('', coord)
             self.sock.send(message.encode())
         elif flag == 'PM':
-            player = data.decode('utf-8')[-1]
             self._outputCon.player_move(data)
         elif flag == 'GC':
-            coord = data.decode('utf-8')[-1]
             self._outputCon.get_coord(data)
         elif flag == 'WC':
             self._outputCon.wrong_coord(dim, data)
