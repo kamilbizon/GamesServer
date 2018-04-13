@@ -1,70 +1,65 @@
 from client.ConsoleTicTacToeInput import ConsoleInput
 from client.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
+from Message import OnlineMessage
 import socket
-import json
 
 dim = 3
 
-class Client:
-    def __init__(self):
+
+class TicTacToeClient:
+    def __init__(self, socket):
         self._inputCon = ConsoleInput()
         self._outputCon = ConsoleTicTacToeOutput()
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        try:
-           self.s.connect(('127.0.0.1', 5005))
-        except ConnectionRefusedError:
-            print("Nie można połączyć się z serverem")
-            exit()
-
-        self.s.settimeout(None)
+        self.sock = socket
         self.listen()
 
     def listen(self):
 
         data = None
+        message = None
         try:
             while data != b'':
-                data = self.s.recv(512)
-                self.parse(data)
+                data = self.sock.recv(512)
         except:
-            pass
+            print("exc")
 
-    def parse(self, data):
+        message = OnlineMessage().decode(data)
+        self.parse(message)
 
-        flag = data.decode('utf-8')[0:2]
+    def parse(self, message):
+
+        flag = message.get_header()
+        data = message.get_body()
 
         if flag == 'FI':
-            player = data.decode('utf-8')[-1]
-            self._outputCon.first(player)
+            self._outputCon.first(data)
         elif flag == 'SC':
-            player = data.decode('utf-8')[-1]
-            self._outputCon.second(player)
+            self._outputCon.second(data)
         elif flag == 'WE':
             self._outputCon.welcome()
         elif flag == 'DB':
-            board = json.loads(data[2:-1])
-            self._outputCon.draw_board(board, dim)
+            board = data
+            self._outputCon.draw_board(board)
         elif flag == 'GM':
             coord = self._inputCon.get_player_move(dim)
-            self.s.send(bytes(str(coord), 'utf-8'))
+            message = OnlineMessage('', coord)
+            self.sock.send(message.encode())
         elif flag == 'PM':
             player = data.decode('utf-8')[-1]
-            self._outputCon.player_move(player)
+            self._outputCon.player_move(data)
         elif flag == 'GC':
             coord = data.decode('utf-8')[-1]
-            self._outputCon.get_coord(coord)
+            self._outputCon.get_coord(data)
         elif flag == 'WC':
-            player = data.decode('utf-8')[-1]
-            self._outputCon.wrong_coord(dim)
+            self._outputCon.wrong_coord(dim, data)
         elif flag == 'WM':
             self._outputCon.wrong_move()
         elif flag == 'CW':
-            winner = data.decode('utf-8')[-1]
-            self._outputCon.congratulate_winner(winner)
-            self.s.close()
+            self._outputCon.congratulate_winner(data)
+            self.sock.close()
         elif flag == 'DR':
             self._outputCon.announce_draw()
-            self.s.close()
+            self.sock.close()
 
         self.listen()
 

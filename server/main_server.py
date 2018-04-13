@@ -10,15 +10,15 @@ def ask_game(server):
     message = OnlineMessage('AG')
     server.sent(message.encode(), player[0])
     message.decode(server.get(player[0]))
+    type_game = message.get_header()
 
-    while message.get_header() not in ['TIC', 'ML']:
-        message.set_header('WG')
-        server.sent(message.encode(), player[0])
-        message.decode(server.get(player[0]))
-
-    if message.get_header() == 'TIC':
+    if type_game == 'TIC':
         server.connect_player()
-    return message.get_header()
+        players = server.get_player_list()
+        message.set_header('JG') # join game
+        server.sent(message.encode(), players[1])
+
+    return type_game
 
 
 def main():
@@ -27,7 +27,7 @@ def main():
     if type_game == 'TIC':
         game = TicTacToeGame(server)
     else:
-        game = MoreLessGame()
+        game = MoreLessGame(server)
     game.start_game()
 
 
