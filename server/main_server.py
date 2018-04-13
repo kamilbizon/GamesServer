@@ -12,6 +12,9 @@ def ask_game(server):
     message.decode(server.get(player[0]))
     type_game = message.get_header()
 
+    if type_game not in ['TIC', 'ML']:
+        pass
+
     if type_game == 'TIC':
         server.connect_player()
         players = server.get_player_list()

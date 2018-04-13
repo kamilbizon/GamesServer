@@ -1,23 +1,22 @@
 class MoreLessOutput:
-    def get_min_range(self):
+
+    def welcome(self):
         pass
 
-
-    def get_max_range(self):
+    def get_player_move(self):
         pass
-
-
-    def get_guess(self):
-        pass
-
 
     def less(self):
         pass
 
-
     def more(self):
         pass
 
-
     def bad_guess(self):
+        pass
+
+    def congratulate_winner(self, winner):
+        pass
+
+    def wrong_move(self):
         pass

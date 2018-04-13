@@ -17,12 +17,16 @@ def connect_server():
     message.decode(data)
     if message.get_header() == 'AG': # ask game
         answer = None
-        while answer not in ['T', 'L']:
-            print("What game you want to play: TicTacToe or MoreOrLess, write T or L")
+        while answer not in ['T', 'ML']:
+            print("What game you want to play: TicTacToe or MoreOrLess, write T or ML")
             answer = input()
 
-        message = OnlineMessage('TIC')
-        sock.send(message.encode())
+        if answer == 'T':
+            message = OnlineMessage('TIC')
+            sock.send(message.encode())
+        else:
+            message = OnlineMessage('ML')
+            sock.send(message.encode())
 
     return sock
 

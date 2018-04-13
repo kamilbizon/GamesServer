@@ -1,6 +1,6 @@
-from TicTacToeInput import Input
+from TicTacToeInput import TicTacToeInput
 
-class ConsoleInput(Input):
+class ConsoleTicTacToeInput(TicTacToeInput):
 
     def get_player_move(self, dim, player = 0):
         coord = input()

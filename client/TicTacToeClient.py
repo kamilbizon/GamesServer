@@ -1,4 +1,4 @@
-from client.ConsoleTicTacToeInput import ConsoleInput
+from client.ConsoleTicTacToeInput import ConsoleTicTacToeInput
 from client.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
 from Message import OnlineMessage
 import socket
@@ -8,7 +8,7 @@ dim = 3
 
 class TicTacToeClient:
     def __init__(self, socket):
-        self._inputCon = ConsoleInput()
+        self._inputCon = ConsoleTicTacToeInput()
         self._outputCon = ConsoleTicTacToeOutput()
         self.sock = socket
         self.listen()

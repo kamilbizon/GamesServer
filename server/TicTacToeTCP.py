@@ -1,11 +1,11 @@
 from time import sleep
-from TicTacToeInput import Input
+from TicTacToeInput import TicTacToeInput
 from TicTacToeOutput import TicTacToeOutput
 from server import Server
 from Message import OnlineMessage
 
 
-class TicTacToeTCP(Input, TicTacToeOutput):
+class TicTacToeTCP(TicTacToeInput, TicTacToeOutput):
 
     def __init__(self, server):
         self._server = server
