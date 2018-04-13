@@ -1,6 +1,6 @@
 from server.TicTacToeBoard import TicTacToeBoard
 from server.TicTacToeTCP import TicTacToeTCP
-from random import sample
+
 
 
 class TicTacToeGame:
@@ -22,11 +22,6 @@ class TicTacToeGame:
 
         self._actual_player = 'O'
         second_player = 'X'
-        players = sample(self.players, 2)
-        self._actual_player = players[0]
-        second_player = players[1]
-
-        print(self._actual_player, second_player)
 
         self._TCP.first_second(self._actual_player, second_player)
 
@@ -40,32 +35,31 @@ class TicTacToeGame:
 
 
     def player_get_move(self):
-
         self._TCP.player_move(self._actual_player)
-        self._TCP.get_coord('x')
+        self._TCP.get_coord('x', self._actual_player)
 
         x = False
         while not x:
-            x = self._TCP.get_player_move(self._dim)
+            x = self._TCP.get_player_move(self._dim, self._actual_player)
             if x == False:
-                self._TCP.wrong_coord(self._dim)
+                self._TCP.wrong_coord(self._dim, self._actual_player)
 
-        self._TCP.get_coord('y')
+        self._TCP.get_coord('y', self._actual_player)
         y = False
         while not y:
-            y = self._TCP.get_player_move(self._dim)
+            y = self._TCP.get_player_move(self._dim, self._actual_player)
             if y == False:
-                self._TCP.wrong_coord(self._dim)
+                self._TCP.wrong_coord(self._dim, self._actual_player)
         return x-1, y-1
 
-    def player_make_move(self):
 
+    def player_make_move(self):
         good_move = False
         while not good_move:
             move = self.player_get_move()
             good_move = self._board.set_point(move[0], move[1], self._actual_player)
             if not good_move:
-                self._TCP.wrong_move()
+                self._TCP.wrong_move(self._actual_player)
 
         self._TCP.draw_board(self._board.get_board_state(), self._dim)
 
@@ -83,7 +77,5 @@ class TicTacToeGame:
         else:
             self._TCP.announce_draw()
             is_end = True
-
-        self._TCP.change_conn()
 
         return is_end

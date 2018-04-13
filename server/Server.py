@@ -16,15 +16,19 @@ class Server:
         number_of_players = len(self._player_list)
         while len(self._player_list) == number_of_players:
             print("wait for client")
-            self._conn, addr = self.sock.accept()
-            self._player_list[number_of_players + 1] = Players(addr, self.TCP_PORT, 'Player' + str(len(self._player_list)), self._conn)
+
+            conn, address = self.sock.accept()
+            self._player_list["player" + str(number_of_players+1)] =\
+                Players(address, 'Player' + str(number_of_players), conn)
+
+    def close_connection(self, player):
+        self._player_list[player].conn.close()
 
     def get_player_list(self):
         return list(self._player_list.keys())
 
-    def sent(self, message):
-        pass
+    def sent(self, message, player):
+        self._player_list[player].conn.sendall(message)
 
-    def get(self):
-        pass
-
+    def get(self, player):
+        return self._player_list[player].conn.recv(512)

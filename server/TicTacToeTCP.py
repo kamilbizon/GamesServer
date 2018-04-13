@@ -99,12 +99,12 @@ class TicTacToeTCP(Input, TicTacToeOutput):
         message = OnlineMessage('CW', winner)
         self._server.sent(message.encode(), self._player_list[0])
         self._server.sent(message.encode(), self._player_list[1])
-        self._server.close_connsction(self._player_list[1])
-        self._server.close_connsction(self._player_list[0])
+        self._server.close_connection(self._player_list[1])
+        self._server.close_connection(self._player_list[0])
 
     def announce_draw(self):
         message = OnlineMessage('DR')
         self._server.sent(message.encode(), self._player_list[0])
         self._server.sent(message.encode(), self._player_list[1])
-        self._server.close_connsction(self._player_list[1])
-        self._server.close_connsction(self._player_list[0])
+        self._server.close_connection(self._player_list[1])
+        self._server.close_connection(self._player_list[0])

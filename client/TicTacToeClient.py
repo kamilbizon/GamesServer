@@ -55,9 +55,11 @@ class TicTacToeClient:
         elif flag == 'CW':
             self._outputCon.congratulate_winner(data)
             self.sock.close()
+            exit()
         elif flag == 'DR':
             self._outputCon.announce_draw()
             self.sock.close()
+            exit()
 
         self.listen()
 

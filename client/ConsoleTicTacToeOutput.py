@@ -43,7 +43,7 @@ class ConsoleTicTacToeOutput(TicTacToeOutput):
         print("Wrong move!")
 
     def congratulate_winner(self, winner):
-        print("Congratulate", winner, "player, you win!")
+        print(winner, "player win!")
 
     def announce_draw(self):
         print("It's a draw!")
