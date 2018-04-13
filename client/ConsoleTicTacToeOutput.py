@@ -1,6 +1,6 @@
-from Output import Output
+from TicTacToeOutput import TicTacToeOutput
 
-class ConsoleOutput(Output):
+class ConsoleTicTacToeOutput(TicTacToeOutput):
 
     def first(self, player):
         print("You are {} player, you are first".format(player))
@@ -11,13 +11,13 @@ class ConsoleOutput(Output):
     def welcome(self):
         print("Welcome in TicTacToe!")
 
-    def ask_board_size(self):
+    def ask_board_size(self, player):
         print("What board size do you want? (Not less than 3): ")
 
-    def wrong_size(self):
+    def wrong_size(self, player):
         print("Wrong board size!")
 
-    def draw_board(self, board, dim):
+    def draw_board(self, board, dim = 3):
         for i in range(dim):
             if i != 0:
                 for k in range(dim - 1):
@@ -34,13 +34,13 @@ class ConsoleOutput(Output):
     def player_move(self, player):
         print("Player", player, "move")
 
-    def get_coord(self, coord):
+    def get_coord(self, coord, player):
         print("Coordinate {}: ".format(coord))
 
-    def wrong_coord(self, dim):
+    def wrong_coord(self, dim, player):
         print("Wrong value! Coordinates have to be integer from 1 to {}".format(dim))
 
-    def wrong_move(self):
+    def wrong_move(self, player):
         print("Wrong move!")
 
     def congratulate_winner(self, winner):

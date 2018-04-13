@@ -1,5 +1,5 @@
-from client.ConsoleInput import ConsoleInput
-from client.ConsoleOutput import ConsoleOutput
+from client.ConsoleTicTacToeInput import ConsoleInput
+from client.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
 import socket
 import json
 
@@ -8,7 +8,7 @@ dim = 3
 class Client:
     def __init__(self):
         self._inputCon = ConsoleInput()
-        self._outputCon = ConsoleOutput()
+        self._outputCon = ConsoleTicTacToeOutput()
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
            self.s.connect(('127.0.0.1', 5005))

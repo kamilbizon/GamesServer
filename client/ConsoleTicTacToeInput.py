@@ -1,8 +1,8 @@
-from Input import Input
+from TicTacToeInput import Input
 
 class ConsoleInput(Input):
 
-    def get_player_move(self, dim):
+    def get_player_move(self, dim, player):
         coord = input()
 
         try:
@@ -12,7 +12,7 @@ class ConsoleInput(Input):
 
         return coord
 
-    def get_board_size(self):
+    def get_board_size(self, player):
         size = input()
 
         try:

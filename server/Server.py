@@ -20,6 +20,9 @@ class Server:
             self._player_list["player" + str(number_of_players+1)] =\
                 Players(address, 'Player' + str(number_of_players), conn)
 
+    def close_connection(self, player):
+        self._player_list[player].conn.close()
+
     def get_player_list(self):
         return list(self._player_list.keys())
 

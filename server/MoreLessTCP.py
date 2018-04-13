@@ -1,11 +1,11 @@
 from time import sleep
-from Input import Input
-from Output import Output
+from TicTacToeInput import Input
+from MoreLessOutput import MoreLessOutput
 from server.Server import Server
 from Message import OnlineMessage
 
 
-class MoreLessTCP(Input, Output):
+class MoreLessTCP(Input, MoreLessOutput):
 
     def __init__(self, server):
         self._server = server
@@ -17,7 +17,7 @@ class MoreLessTCP(Input, Output):
         else:
             self._conn = self._player_list[0].conn
 
-    def get_player_move(self, dim):
+    def get_player_move(self, dim, player):
         message = OnlineMessage('GM')
         self._server.sent(message.encode())
         message = message.decode(self._server.get())
