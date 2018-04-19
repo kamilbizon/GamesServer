@@ -7,24 +7,21 @@ from Message import OnlineMessage
 
 class MoreLessTCP(MoreLessInput, MoreLessOutput):
 
+    PAUSE_TIME = 0.1
+
     def __init__(self, server):
         self._server = server
         self._player_list = self._server.get_player_list()
 
-    def get_player_move(self):
-        message = OnlineMessage('GM')
-        self._server.sent(message.encode())
-
     def welcome(self):
         message = OnlineMessage('WE')
-        message = OnlineMessage('WE')
         self._server.sent(message.encode(), self._player_list[0])
-        sleep(0.1)
+        sleep(self.PAUSE_TIME)
 
-    def congratulate_winner(self, winner):
-        message = OnlineMessage('CW', winner)
+    def ask_min_range(self):
+        message = OnlineMessage('AMI')
         self._server.sent(message.encode(), self._player_list[0])
-        self._server.close_connection(self._player_list[0])
+        sleep(self.PAUSE_TIME)
 
     def get_min_range(self):
         message = OnlineMessage('GMI')
@@ -33,40 +30,72 @@ class MoreLessTCP(MoreLessInput, MoreLessOutput):
         try:
             min_range = int(message.get_body())
         except ValueError:
-            return False
+            return None
 
         return min_range
 
+    def ask_max_range(self):
+        message = OnlineMessage('AMX')
+        self._server.sent(message.encode(), self._player_list[0])
+        sleep(self.PAUSE_TIME)
+
     def get_max_range(self, min_range):
-        message = OnlineMessage('GMA')
+        message = OnlineMessage('GMX')
         self._server.sent(message.encode(), self._player_list[0])
         message.decode(self._server.get(self._player_list[0]))
         try:
             max_range = int(message.get_body())
         except ValueError:
-            return False
+            return None
 
         if min_range < max_range:
             return max_range
 
-        return False
+        return None
 
-    def get_guess(self, min, max):
-        message = OnlineMessage('GG')
+    def wrong_max_range(self, min_range):
+        message = OnlineMessage('WMX')
+        self._server.sent(message.encode(), self._player_list[0])
+        sleep(self.PAUSE_TIME)
+
+    def ask_player_guess(self):
+        message = OnlineMessage('APG')
+        self._server.sent(message.encode(), self._player_list[0])
+        sleep(self.PAUSE_TIME)
+
+    def get_guess(self, min_range, max_range):
+        min_max = [min_range, max_range]
+        message = OnlineMessage('GG', min_max)
         self._server.sent(message.encode(), self._player_list[0])
         message.decode(self._server.get(self._player_list[0]))
 
-    def bad_guess(self):
-        message = OnlineMessage('BG')
+        try:
+            guess = int(message.get_body())
+        except ValueError:
+            return None
+
+        if min_range <= guess <= max_range:
+            return guess
+
+        return None
+
+    def wrong_guess(self, min_range, max_range):
+        min_max = [min_range, max_range]
+        message = OnlineMessage('WG', min_max)
+        self._server.sent(message.encode(), self._player_list[0])
+        sleep(self.PAUSE_TIME)
 
     def less(self):
         message = OnlineMessage('LS')
-        self._server.sent(message.encode())
+        self._server.sent(message.encode(), self._player_list[0])
+        sleep(self.PAUSE_TIME)
 
     def more(self):
         message = OnlineMessage('MR')
-        self._server.sent(message.encode())
+        self._server.sent(message.encode(), self._player_list[0])
+        sleep(self.PAUSE_TIME)
 
-    def wrong_move(self):
-        message = OnlineMessage('WM')
-        self._server.sent(message.encode())
+    def congratulate_win(self):
+        message = OnlineMessage('CW')
+        self._server.sent(message.encode(), self._player_list[0])
+        self._server.close_connection(self._player_list[0])

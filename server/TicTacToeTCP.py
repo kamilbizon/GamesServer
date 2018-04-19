@@ -29,7 +29,7 @@ class TicTacToeTCP(TicTacToeInput, TicTacToeOutput):
         self._server.sent(message.encode(), self.actual_player(player))
         message.decode(self._server.get(self.actual_player(player)))
         try:
-            coord = message.get_body()
+            coord = int(message.get_body())
         except ValueError:
             return False
 
@@ -44,7 +44,7 @@ class TicTacToeTCP(TicTacToeInput, TicTacToeOutput):
         message.decode(self._server.get(self.actual_player(player)))
 
         try:
-            size = message.get_body()
+            size = int(message.get_body())
         except ValueError:
             return False
 

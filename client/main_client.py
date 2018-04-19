@@ -1,8 +1,11 @@
 from client.TicTacToeClient import TicTacToeClient
+from client.MoreLessClient import MoreLessClient
 from Message import OnlineMessage
 import socket
 
+
 def connect_server():
+
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         sock.connect(('127.0.0.1', 5005))
@@ -15,25 +18,32 @@ def connect_server():
     message = OnlineMessage()
     data = sock.recv(512)
     message.decode(data)
+
+    answer = None
     if message.get_header() == 'AG': # ask game
-        answer = None
-        while answer not in ['T', 'ML']:
-            print("What game you want to play: TicTacToe or MoreOrLess, write T or ML")
+        while answer not in ['TIC', 'ML']:
+            print("What game you want to play: TicTacToe or MoreOrLess, write TIC or ML")
             answer = input()
 
-        if answer == 'T':
+        if answer == 'TIC':
             message = OnlineMessage('TIC')
             sock.send(message.encode())
         else:
             message = OnlineMessage('ML')
             sock.send(message.encode())
 
-    return sock
+    return sock, answer
 
 
 def main():
-    socket = connect_server()
-    client = TicTacToeClient(socket)
+    sock, answer = connect_server()
+    if answer == 'TIC':
+        client = TicTacToeClient(sock)
+    elif answer == "ML":
+        client = MoreLessClient(sock)
+    else:
+        exit()
+
 
 if __name__ == '__main__':
     main()
