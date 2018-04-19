@@ -2,8 +2,8 @@ from server.TicTacToeBoard import TicTacToeBoard
 from server.TicTacToeTCP import TicTacToeTCP
 
 
-
 class TicTacToeGame:
+
     players = ['O', 'X']
 
     def __init__(self, server):

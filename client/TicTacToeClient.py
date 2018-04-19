@@ -17,7 +17,7 @@ class TicTacToeClient:
 
         data = None
         try:
-            while data == None:
+            while data is None:
                 data = self.sock.recv(512)
         except:
             pass
@@ -28,44 +28,44 @@ class TicTacToeClient:
 
     def parse(self, message):
 
-        flag = message.get_header()
+        header = message.get_header()
         data = message.get_body()
 
-        if flag == 'FI':
+        if header == 'FI':
             self._outputCon.first(data)
-        elif flag == 'SC':
+        elif header == 'SC':
             self._outputCon.second(data)
-        elif flag == 'WE':
+        elif header == 'WE':
             self._outputCon.welcome()
-        elif flag == 'DB':
+        elif header == 'DB':
             board = data
             self._outputCon.draw_board(board)
-        elif flag == 'GM':
+        elif header == 'GM':
             coord = self._inputCon.get_player_move(dim)
             message = OnlineMessage('', coord)
             self.sock.send(message.encode())
-        elif flag == 'PM':
+        elif header == 'PM':
             self._outputCon.player_move(data)
-        elif flag == 'GC':
+        elif header == 'GC':
             self._outputCon.get_coord(data)
-        elif flag == 'WC':
+        elif header == 'WC':
             self._outputCon.wrong_coord(dim, data)
-        elif flag == 'WM':
+        elif header == 'WM':
             self._outputCon.wrong_move()
-        elif flag == 'CW':
+        elif header == 'CW':
             self._outputCon.congratulate_winner(data)
             self.sock.close()
             exit()
-        elif flag == 'DR':
+        elif header == 'DR':
             self._outputCon.announce_draw()
             self.sock.close()
             exit()
 
         self.listen()
 
-        # elif flag == 'GS':
+        # elif header == 'GS':
         #     size = self._inputCon.get_board_size()
         #     self.s.send(bytes(size, 'utf-8'))
 
-        # elif flag == 'WS':
+        # elif header == 'WS':
         #     self._outputCon.wrong_size()

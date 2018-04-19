@@ -19,8 +19,9 @@ def connect_server():
     data = sock.recv(512)
     message.decode(data)
 
-    answer = None
     if message.get_header() == 'AG': # ask game
+
+        answer = None
         while answer not in ['TIC', 'ML']:
             print("What game you want to play: TicTacToe or MoreOrLess, write TIC or ML")
             answer = input()
@@ -31,6 +32,8 @@ def connect_server():
         else:
             message = OnlineMessage('ML')
             sock.send(message.encode())
+    else:
+        answer = 'TIC'
 
     return sock, answer
 
