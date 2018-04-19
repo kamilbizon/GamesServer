@@ -29,8 +29,6 @@ class MoreLessClient:
         header = message.get_header()
         data = message.get_body()
 
-        print(header)
-
         if header == 'WE':
             self._outputCon.welcome()
         elif header == 'AMI':
