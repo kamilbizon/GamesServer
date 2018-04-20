@@ -8,6 +8,9 @@ class ConsoleMoreLessOutput(MoreLessOutput):
     def ask_min_range(self):
         print("What is the minimum number in the range from which you want to guess?")
 
+    def wrong_min_range(self):
+        print("The minimum number must be integer")
+
     def ask_max_range(self):
         print("What is the maximum number in the range from which you want to guess?")
 

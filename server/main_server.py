@@ -6,20 +6,29 @@ from Message import OnlineMessage
 
 def ask_game(server):
     server.connect_player()
-    player = server.get_player_list()
-    message = OnlineMessage('AG')
-    server.sent(message.encode(), player[0])
-    message.decode(server.get(player[0]))
-    type_game = message.get_header()
+    players = server.get_player_list()
 
-    if type_game not in ['TIC', 'ML']:
-        pass
+    message = OnlineMessage()
+    type_game = None
+    while type_game not in ['TIC', 'ML']:
+        message = OnlineMessage('AG')   # ask game
+        server.send(message.encode(), players[0])
+        message.decode(server.get(players[0]))
+        type_game = message.get_header()
+
+        if type_game not in ['TIC', 'ML']:
+            message.set_header('WG') # join game
+            server.send(message.encode(), players[0])
+
+    message.set_header('CG')    # correct game
+    message.set_body(type_game)
+    server.send(message.encode(), players[0])
 
     if type_game == 'TIC':
         server.connect_player()
-        players = server.get_player_list()
         message.set_header('JG') # join game
-        server.sent(message.encode(), players[1])
+        players = server.get_player_list()
+        server.send(message.encode(), players[1])
 
     return type_game
 

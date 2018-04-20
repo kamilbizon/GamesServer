@@ -1,4 +1,3 @@
-from time import sleep
 from MoreLessInput import MoreLessInput
 from MoreLessOutput import MoreLessOutput
 from server.Server import Server
@@ -7,25 +6,21 @@ from Message import OnlineMessage
 
 class MoreLessTCP(MoreLessInput, MoreLessOutput):
 
-    PAUSE_TIME = 0.1
-
     def __init__(self, server):
         self._server = server
         self._player_list = self._server.get_player_list()
 
     def welcome(self):
         message = OnlineMessage('WE')
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def ask_min_range(self):
         message = OnlineMessage('AMI')
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def get_min_range(self):
         message = OnlineMessage('GMI')
-        self._server.sent(message.encode(), self._player_list[0])
+        self._server.send(message.encode(), self._player_list[0])
         message.decode(self._server.get(self._player_list[0]))
         try:
             min_range = int(message.get_body())
@@ -34,14 +29,17 @@ class MoreLessTCP(MoreLessInput, MoreLessOutput):
 
         return min_range
 
+    def wrong_min_range(self):
+        message = OnlineMessage('WMI')
+        self._server.send(message.encode(), self._player_list[0])
+
     def ask_max_range(self):
         message = OnlineMessage('AMX')
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def get_max_range(self, min_range):
         message = OnlineMessage('GMX')
-        self._server.sent(message.encode(), self._player_list[0])
+        self._server.send(message.encode(), self._player_list[0])
         message.decode(self._server.get(self._player_list[0]))
         try:
             max_range = int(message.get_body())
@@ -55,18 +53,16 @@ class MoreLessTCP(MoreLessInput, MoreLessOutput):
 
     def wrong_max_range(self, min_range):
         message = OnlineMessage('WMX')
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def ask_player_guess(self):
         message = OnlineMessage('APG')
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def get_guess(self, min_range, max_range):
         min_max = [min_range, max_range]
         message = OnlineMessage('GG', min_max)
-        self._server.sent(message.encode(), self._player_list[0])
+        self._server.send(message.encode(), self._player_list[0])
         message.decode(self._server.get(self._player_list[0]))
 
         try:
@@ -82,20 +78,17 @@ class MoreLessTCP(MoreLessInput, MoreLessOutput):
     def wrong_guess(self, min_range, max_range):
         min_max = [min_range, max_range]
         message = OnlineMessage('WG', min_max)
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def less(self):
         message = OnlineMessage('LS')
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def more(self):
         message = OnlineMessage('MR')
-        self._server.sent(message.encode(), self._player_list[0])
-        sleep(self.PAUSE_TIME)
+        self._server.send(message.encode(), self._player_list[0])
 
     def congratulate_win(self):
         message = OnlineMessage('CW')
-        self._server.sent(message.encode(), self._player_list[0])
+        self._server.send(message.encode(), self._player_list[0])
         self._server.close_connection(self._player_list[0])

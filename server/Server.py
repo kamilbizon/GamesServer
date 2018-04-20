@@ -1,8 +1,12 @@
+from time import sleep
 from server.Players import Players
 import socket
 
 
 class Server:
+
+    PAUSE_TIME = 0.1
+
     def __init__(self):
         self.TCP_IP = '127.0.0.1'
         self.TCP_PORT = 5005
@@ -27,8 +31,34 @@ class Server:
     def get_player_list(self):
         return list(self._player_list.keys())
 
-    def sent(self, message, player):
-        self._player_list[player].conn.sendall(message)
+    def send(self, message, player):
+        try:
+            self._player_list[player].conn.sendall(message)
+            sleep(self.PAUSE_TIME)
+        except ConnectionResetError:
+            print("Connection terminated")
+            for player in self._player_list.keys():
+                self.close_connection(player)
+            exit()
+        except ConnectionAbortedError:
+            print("Connection terminated")
+            for player in self._player_list.keys():
+                self.close_connection(player)
+            exit()
 
     def get(self, player):
-        return self._player_list[player].conn.recv(512)
+        message = None
+        try:
+            message = self._player_list[player].conn.recv(512)
+        except ConnectionResetError:
+            print("Connection terminated")
+            for player in self._player_list.keys():
+                self.close_connection(player)
+            exit()
+        except ConnectionAbortedError:
+            print("Connection terminated")
+            for player in self._player_list.keys():
+                self.close_connection(player)
+            exit()
+
+        return message

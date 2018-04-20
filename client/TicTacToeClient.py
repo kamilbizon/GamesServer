@@ -1,12 +1,16 @@
 from client.ConsoleTicTacToeInput import ConsoleTicTacToeInput
 from client.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
 from Message import OnlineMessage
+from time import sleep
 import socket
 
 dim = 3
 
 
 class TicTacToeClient:
+
+    PAUSE_TIME = 0.1
+
     def __init__(self, socket):
         self._inputCon = ConsoleTicTacToeInput()
         self._outputCon = ConsoleTicTacToeOutput()
@@ -17,14 +21,25 @@ class TicTacToeClient:
 
         data = None
         try:
-            while data is None:
-                data = self.sock.recv(512)
-        except:
-            pass
+            data = self.sock.recv(512)
+            if data == b'':
+                print("Server closed connection")
+                exit()
+        except ConnectionResetError:
+            print("Breaking communication with the server")
+            exit()
 
         message = OnlineMessage()
         message.decode(data)
         self.parse(message)
+
+    def send(self, message):
+        try:
+            self.sock.send(message.encode())
+            sleep(self.PAUSE_TIME)
+        except ConnectionResetError:
+            print("Breaking communication with the server")
+            exit()
 
     def parse(self, message):
 
@@ -43,7 +58,7 @@ class TicTacToeClient:
         elif header == 'GM':
             coord = self._inputCon.get_player_move(dim)
             message = OnlineMessage('', coord)
-            self.sock.send(message.encode())
+            self.send(message)
         elif header == 'PM':
             self._outputCon.player_move(data)
         elif header == 'GC':

@@ -9,6 +9,9 @@ class MoreLessOutput:
     def ask_max_range(self):
         pass
 
+    def wrong_min_range(self):
+        pass
+
     def wrong_max_range(self, min_range):
         pass
 

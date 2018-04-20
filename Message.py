@@ -2,6 +2,7 @@ import json
 
 
 class OnlineMessage:
+
     def __init__(self, new_header = '', new_body = ''):
         self.set_header(new_header)
         self.set_body(new_body)

@@ -7,13 +7,16 @@ class MoreLessGame:
 
     def __init__(self, server):
         self._TCP = MoreLessTCP(server)
-        self.start_game()
 
     def start_game(self):
         self._TCP.welcome()
 
-        self._TCP.ask_min_range()
-        self.min = self._TCP.get_min_range()
+        self.min = None
+        while self.min is None:
+            self._TCP.ask_min_range()
+            self.min = self._TCP.get_min_range()
+            if self.min is None:
+                self._TCP.wrong_min_range()
 
         self.max = None
         while self.max is None:
