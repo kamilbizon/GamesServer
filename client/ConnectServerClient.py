@@ -42,6 +42,7 @@ class ConnectServerClient:
             self._outputCon.breaking_connection_server()
             exit()
 
+        print(data)
         message = OnlineMessage()
         message.decode(data)
         self.parse(message)
@@ -74,8 +75,10 @@ class ConnectServerClient:
             if type_game == 'TIC':
                 self._outputCon.waiting_for_second_player()
             self._type_game = type_game
+            return None
 
         elif header == 'JG':
             self._type_game = 'TIC'
+            return None
 
         self.listen()
