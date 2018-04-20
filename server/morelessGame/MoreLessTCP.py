@@ -51,7 +51,7 @@ class MoreLessTCP(MoreLessInput, MoreLessOutput):
         return None
 
     def wrong_max_range(self, min_range):
-        message = OnlineMessage('WMX')
+        message = OnlineMessage('WMX', min_range)
         self._server.send(message.encode(), self._player_list[0])
 
     def ask_player_guess(self):

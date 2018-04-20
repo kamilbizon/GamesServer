@@ -11,21 +11,21 @@ class MoreLessGame:
     def start_game(self):
         self._TCP.welcome()
 
-        self.min = None
-        while self.min is None:
+        self.min_range = None
+        while self.min_range is None:
             self._TCP.ask_min_range()
-            self.min = self._TCP.get_min_range()
-            if self.min is None:
+            self.min_range = self._TCP.get_min_range()
+            if self.min_range is None:
                 self._TCP.wrong_min_range()
 
-        self.max = None
-        while self.max is None:
+        self.max_range = None
+        while self.max_range is None:
             self._TCP.ask_max_range()
-            self.max = self._TCP.get_max_range(self.min)
-            if self.max is None:
-                self._TCP.wrong_max_range(self.min)
+            self.max_range = self._TCP.get_max_range(self.min_range)
+            if self.max_range is None:
+                self._TCP.wrong_max_range(self.min_range)
 
-        self._num_to_guess = randrange(self.min, self.max + 1)
+        self._num_to_guess = randrange(self.min_range, self.max_range + 1)
 
         is_end = False
         while not is_end:
@@ -36,9 +36,9 @@ class MoreLessGame:
         self._TCP.ask_player_guess()
         player_guess = None
         while player_guess is None:
-            player_guess = self._TCP.get_guess(self.min, self.max)
+            player_guess = self._TCP.get_guess(self.min_range, self.max_range)
             if player_guess is None:
-                self._TCP.wrong_guess(self.min, self.max)
+                self._TCP.wrong_guess(self.min_range, self.max_range)
         return player_guess
 
     def player_guess(self):

@@ -15,7 +15,7 @@ class ConsoleMoreLessOutput(MoreLessOutput):
         print("What is the maximum number in the range from which you want to guess?")
 
     def wrong_max_range(self, min_range):
-        print("The maximum number must be integer less than ", min_range)
+        print("The maximum number must be integer more than ", min_range)
 
     def ask_player_guess(self):
         print("What's your guess?")
