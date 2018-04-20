@@ -20,3 +20,6 @@ class MenuOutput:
 
     def cannot_connect_server(self):
         pass
+
+    def no_response(self):
+        pass

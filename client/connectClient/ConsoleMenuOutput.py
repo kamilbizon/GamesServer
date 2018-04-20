@@ -23,3 +23,6 @@ class ConsoleMenuOutput(MenuOutput):
 
     def cannot_connect_server(self):
         print("Cannot connect to server")
+
+    def no_response(self):
+        print("No response")

@@ -25,7 +25,7 @@ class ConnectServerClient:
             self._outputCon.cannot_connect_server()
             exit()
 
-        self._sock.settimeout(None)
+        self._sock.settimeout(50)
 
         self.listen()
         return self._type_game
@@ -40,6 +40,9 @@ class ConnectServerClient:
                 exit()
         except ConnectionResetError:
             self._outputCon.breaking_connection_server()
+            exit()
+        except socket.timeout:
+            self._outputCon.no_response()
             exit()
 
         message = OnlineMessage()
