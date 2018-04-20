@@ -1,8 +1,6 @@
-from client.TicTacToeClient import TicTacToeClient
-from client.MoreLessClient import MoreLessClient
-from client.ConnectServerClient import ConnectServerClient
-from Message import OnlineMessage
-import socket
+from client.tictactoeClient.TicTacToeClient import TicTacToeClient
+from client.morelessClient.MoreLessClient import MoreLessClient
+from client.connectClient.ConnectServerClient import ConnectServerClient
 
 
 def main():

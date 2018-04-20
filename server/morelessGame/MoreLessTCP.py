@@ -1,6 +1,5 @@
-from MoreLessInput import MoreLessInput
-from MoreLessOutput import MoreLessOutput
-from server.Server import Server
+from morelessInputOutputInterface.MoreLessInput import MoreLessInput
+from morelessInputOutputInterface.MoreLessOutput import MoreLessOutput
 from Message import OnlineMessage
 
 

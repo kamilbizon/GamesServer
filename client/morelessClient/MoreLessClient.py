@@ -1,8 +1,7 @@
-from client.ConsoleMoreLessInput import ConsoleMoreLessInput
-from client.ConsoleMoreLessOutput import ConsoleMoreLessOutput
+from client.morelessClient.ConsoleMoreLessInput import ConsoleMoreLessInput
+from client.morelessClient.ConsoleMoreLessOutput import ConsoleMoreLessOutput
 from Message import OnlineMessage
 from time import sleep
-import socket
 
 
 class MoreLessClient:

@@ -1,5 +1,5 @@
-from server.TicTacToeBoard import TicTacToeBoard
-from server.TicTacToeTCP import TicTacToeTCP
+from server.tictactoeGame.TicTacToeBoard import TicTacToeBoard
+from server.tictactoeGame.TicTacToeTCP import TicTacToeTCP
 
 
 class TicTacToeGame:

@@ -1,6 +1,5 @@
-from TicTacToeInput import TicTacToeInput
-from TicTacToeOutput import TicTacToeOutput
-from server import Server
+from tictactoeInputOutputInterface.TicTacToeInput import TicTacToeInput
+from tictactoeInputOutputInterface.TicTacToeOutput import TicTacToeOutput
 from Message import OnlineMessage
 
 

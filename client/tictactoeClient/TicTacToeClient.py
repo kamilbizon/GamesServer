@@ -1,8 +1,7 @@
-from client.ConsoleTicTacToeInput import ConsoleTicTacToeInput
-from client.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
+from client.tictactoeClient.ConsoleTicTacToeInput import ConsoleTicTacToeInput
+from client.tictactoeClient.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
 from Message import OnlineMessage
 from time import sleep
-import socket
 
 dim = 3
 

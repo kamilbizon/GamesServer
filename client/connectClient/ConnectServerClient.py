@@ -1,6 +1,6 @@
 from Message import OnlineMessage
-from client.ConsoleMenuInput import ConsoleMenuInput
-from client.ConsoleMenuOutput import ConsoleMenuOutput
+from client.connectClient.ConsoleMenuInput import ConsoleMenuInput
+from client.connectClient.ConsoleMenuOutput import ConsoleMenuOutput
 from time import sleep
 import socket
 
@@ -42,7 +42,6 @@ class ConnectServerClient:
             self._outputCon.breaking_connection_server()
             exit()
 
-        print(data)
         message = OnlineMessage()
         message.decode(data)
         self.parse(message)

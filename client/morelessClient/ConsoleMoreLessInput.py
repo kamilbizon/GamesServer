@@ -1,4 +1,4 @@
-from MoreLessInput import MoreLessInput
+from morelessInputOutputInterface.MoreLessInput import MoreLessInput
 
 
 class ConsoleMoreLessInput(MoreLessInput):

@@ -1,4 +1,4 @@
-from TicTacToeInput import TicTacToeInput
+from tictactoeInputOutputInterface.TicTacToeInput import TicTacToeInput
 
 
 class ConsoleTicTacToeInput(TicTacToeInput):

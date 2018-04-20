@@ -1,4 +1,4 @@
-from server.MoreLessTCP import MoreLessTCP
+from server.morelessGame.MoreLessTCP import MoreLessTCP
 from random import randrange
 
 
