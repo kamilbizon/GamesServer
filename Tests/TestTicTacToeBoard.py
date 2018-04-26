@@ -1,7 +1,7 @@
 from unittest import TestCase
 from server.tictactoeGame.TicTacToeBoard import TicTacToeBoard
 
-dim = 607     # you can change this value to check any board size >= 3
+dim = 3     # you can change this value to check any board size >= 3
 
 
 class TestTicTacToeBoard(TestCase):
