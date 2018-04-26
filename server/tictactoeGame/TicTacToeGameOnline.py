@@ -8,6 +8,7 @@ class TicTacToeGame:
 
     def __init__(self, server):
         self._TCP = TicTacToeTCP(server)
+
         # no need for larger board atm
         # self._TCP.ask_board_size()
         #
@@ -20,8 +21,8 @@ class TicTacToeGame:
         self._dim = 3
         self._board = TicTacToeBoard(self._dim)
 
-        self._actual_player = 'O'
-        second_player = 'X'
+        self._actual_player = self.players[0]
+        second_player = self.players[1]
 
         self._TCP.first_second(self._actual_player, second_player)
 

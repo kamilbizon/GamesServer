@@ -90,4 +90,3 @@ class MoreLessTCP(MoreLessInput, MoreLessOutput):
     def congratulate_win(self):
         message = OnlineMessage('CW')
         self._server.send(message.encode(), self._player_list[0])
-        self._server.close_connection(self._player_list[0])

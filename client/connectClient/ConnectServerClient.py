@@ -9,6 +9,12 @@ class ConnectServerClient:
 
     PAUSE_TIME = 0.1
 
+    MESSAGES_FROM_SERVER = {'AskGame': 'AG',
+                            'WrongGame': 'WG',
+                            'CorrectGame': 'CG',
+                            'JoinGame': 'JG',
+                            'TicTacToe': 'TIC'}
+
     def __init__(self):
 
         self._sock = None
@@ -65,21 +71,21 @@ class ConnectServerClient:
         header = message.get_header()
         data = message.get_body()
 
-        if header == 'AG':
+        if header == self.MESSAGES_FROM_SERVER['AskGame']:
             self._outputCon.ask_game()
             type_game = self._inputCon.get_game_name()
             message = OnlineMessage(type_game)
             self.send(message)
-        elif header == 'WG':
+        elif header == self.MESSAGES_FROM_SERVER['WrongGame']:
             self._outputCon.wrong_game_name()
-        elif header == 'CG':
+        elif header == self.MESSAGES_FROM_SERVER['CorrectGame']:
             type_game = data
-            if type_game == 'TIC':
+            if type_game == self.MESSAGES_FROM_SERVER['TicTacToe']:
                 self._outputCon.waiting_for_second_player()
             self._type_game = type_game
             return None
 
-        elif header == 'JG':
+        elif header == self.MESSAGES_FROM_SERVER['JoinGame']:
             self._type_game = 'TIC'
             return None
 

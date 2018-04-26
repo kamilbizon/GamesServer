@@ -2,6 +2,7 @@ from client.tictactoeClient.ConsoleTicTacToeInput import ConsoleTicTacToeInput
 from client.tictactoeClient.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
 from Message import OnlineMessage
 from time import sleep
+import socket
 
 dim = 3
 
@@ -38,6 +39,9 @@ class TicTacToeClient:
             sleep(self.PAUSE_TIME)
         except ConnectionResetError:
             print("Breaking communication with the server")
+            exit()
+        except socket.timeout:
+            print("No response")
             exit()
 
     def parse(self, message):
