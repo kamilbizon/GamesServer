@@ -1,10 +1,10 @@
-from unittest import TestCase
+import unittest
 from server.tictactoeGame.TicTacToeBoard import TicTacToeBoard
 
 dim = 3     # you can change this value to check any board size >= 3
 
 
-class TestTicTacToeBoard(TestCase):
+class TestTicTacToeBoard(unittest.TestCase):
     def test_set_point_return_false_if_field_is_occupied(self):
         board = TicTacToeBoard(dim)
         board.set_point(0, 0, 'X')
@@ -89,3 +89,7 @@ class TestTicTacToeBoard(TestCase):
                     board.set_point(i + 1, j, "O")
 
         self.assertFalse(board.is_move_available())
+
+
+if __name__ == '__main__':
+    unittest.main()
