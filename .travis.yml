@@ -1,9 +1,13 @@
 language: python
 python:
   - "3.6"
+  
 script:
   - python test.py
+  - coverage run --source=./ manage.py test
+  
 notifications:
   email: false
+  
 after_success:
   - coveralls
