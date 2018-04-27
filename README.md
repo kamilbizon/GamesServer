@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kamilbizon/GamesServer.svg?branch=master)](https://travis-ci.org/kamilbizon/GamesServer)[![Coverage Status](https://coveralls.io/repos/github/kamilbizon/GamesServer/badge.svg?branch=master)](https://coveralls.io/github/kamilbizon/GamesServer?branch=master)
+[![Build Status](https://travis-ci.org/kamilbizon/GamesServer.svg?branch=master)](https://travis-ci.org/kamilbizon/GamesServer) [![Coverage Status](https://coveralls.io/repos/github/kamilbizon/GamesServer/badge.svg?branch=master)](https://coveralls.io/github/kamilbizon/GamesServer?branch=master)
 # TicTacToe
 This program is our implementation of the tic tac toe game within console terminal by TCP connection using the python 
 scripting language.  
