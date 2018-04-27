@@ -1,7 +1,16 @@
 language: python
 python:
   - "3.6"
+  
+install:
+  - pip install coveralls
+  
 script:
   - python test.py
+  - coverage run --source=./ test.py
+  
 notifications:
   email: false
+  
+after_success:
+  - coveralls
