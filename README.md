@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/kamilbizon/GamesServer.svg?branch=master)](https://travis-ci.org/kamilbizon/GamesServer)
 # TicTacToe
 This program is our implementation of the tic tac toe game within console terminal by TCP connection using the python 
 scripting language.  
