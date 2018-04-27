@@ -80,7 +80,7 @@ class TestTicTacToeBoard(unittest.TestCase):
                 for j in range(1, dim):
                     board.set_point(i, j, "X")
                     board.set_point(i + 1, j, "O")
-        else:
+        elif dim % 2 == 0:
             for i in range(0, dim - 1, 2):
                 board.set_point(i, 0, "O")
                 board.set_point(i + 1, 0, "X")

@@ -27,7 +27,7 @@ class ConsoleMoreLessOutput(MoreLessOutput):
         print("It's more")
 
     def wrong_guess(self, min_range, max_range):
-        print("Your guess must be integer beetwen ", min_range, " and ", max_range)
+        print("Your guess must be integer between ", min_range, " and ", max_range)
 
     def congratulate_win(self):
         print("Your guess is correct, you win!")
