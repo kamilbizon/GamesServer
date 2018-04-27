@@ -1,5 +1,7 @@
 import unittest
-from ..server.tictactoeGame.TicTacToeBoard import TicTacToeBoard
+import sys
+sys.path.insert(0, '..')
+from .server.tictactoeGame.TicTacToeBoard import TicTacToeBoard
 
 dim = 3     # you can change this value to check any board size >= 3
 
