@@ -4,13 +4,13 @@ from client.connectClient.ConnectServerClient import ConnectServerClient
 
 
 def main():
-    connect_server_client = ConnectServerClient()
-    type_game = connect_server_client.connect_server()
+    client = ConnectServerClient()
+    type_game = client.connect_server()
 
     if type_game == 'TIC':
-        client = TicTacToeClient(connect_server_client.get_socket())
+        client = TicTacToeClient(client.get_socket())
     elif type_game == "ML":
-        client = MoreLessClient(connect_server_client.get_socket())
+        client = MoreLessClient(client.get_socket())
     else:
         exit()
 
