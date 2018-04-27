@@ -7,7 +7,7 @@ install:
   
 script:
   - python test.py
-  - coverage run --source=./ python test.py
+  - coverage run --source=./ test.py
   
 notifications:
   email: false
