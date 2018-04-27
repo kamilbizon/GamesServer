@@ -37,18 +37,18 @@ class TicTacToeGame:
 
     def player_get_move(self):
         self._TCP.player_move(self._actual_player)
-        self._TCP.get_coord('x', self._actual_player)
+        self._TCP.ask_coord('x', self._actual_player)
 
         x = False
         while not x:
-            x = self._TCP.get_player_move(self._dim, self._actual_player)
+            x = self._TCP.get_coord(self._dim, self._actual_player)
             if x == False:
                 self._TCP.wrong_coord(self._dim, self._actual_player)
 
-        self._TCP.get_coord('y', self._actual_player)
+        self._TCP.ask_coord('y', self._actual_player)
         y = False
         while not y:
-            y = self._TCP.get_player_move(self._dim, self._actual_player)
+            y = self._TCP.get_coord(self._dim, self._actual_player)
             if y == False:
                 self._TCP.wrong_coord(self._dim, self._actual_player)
         return x-1, y-1

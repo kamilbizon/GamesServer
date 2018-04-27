@@ -3,7 +3,7 @@ from tictactoeInputOutputInterface.TicTacToeInput import TicTacToeInput
 
 class ConsoleTicTacToeInput(TicTacToeInput):
 
-    def get_player_move(self, dim, player = 0):
+    def get_coord(self, dim, player = 0):
         coord = input()
 
         try:

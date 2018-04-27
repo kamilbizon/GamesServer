@@ -15,7 +15,7 @@ class TicTacToeOutput:
     def player_move(self, player):
         pass
 
-    def get_coord(self, coord, player):
+    def ask_coord(self, coord, player):
         pass
 
     def wrong_coord(self, dim, player):
