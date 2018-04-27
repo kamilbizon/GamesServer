@@ -7,18 +7,18 @@ from time import sleep
 class MoreLessClient:
 
     MESSAGES_FROM_SERVER = {'Welcome': 'WE',
-                          'AskMinRange': 'AMI',
-                          'GetMinRange': 'GMI',
-                          'WrongMinRange': 'WMI',
-                          'AskMaxRange': 'AMX',
-                          'GetMaxRange': 'GMX',
-                          'WrongMaxRange': 'WMX',
-                          'AskPlayerGuess': 'APG',
-                          'GetGuess': 'GG',
-                          'WrongGuess': 'WG',
-                          'Less': 'LS',
-                          'More': 'MR',
-                          'CongratulateWin': 'CW'}
+                            'AskMinRange': 'AMI',
+                            'GetMinRange': 'GMI',
+                            'WrongMinRange': 'WMI',
+                            'AskMaxRange': 'AMX',
+                            'GetMaxRange': 'GMX',
+                            'WrongMaxRange': 'WMX',
+                            'AskPlayerGuess': 'APG',
+                            'GetGuess': 'GG',
+                            'WrongGuess': 'WG',
+                            'Less': 'LS',
+                            'More': 'MR',
+                            'CongratulateWin': 'CW'}
 
     PAUSE_TIME = 0.1
 
