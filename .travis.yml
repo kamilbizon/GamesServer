@@ -4,7 +4,7 @@ python:
   
 script:
   - python test.py
-  - coverage run --source=./ manage.py test
+  - coverage run --source=./ python test.py
   
 notifications:
   email: false
