@@ -4,13 +4,10 @@ from server.ServerTransitionFSM import ServerTransitionFSM
 from server.ServerTransitionFSM import Event
 from server.tictactoeGame.TicTacToeGameOnline import TicTacToeGame
 from server.morelessGame.MoreLessOnline import MoreLessGame
-from time import sleep
 import socket
 
 
 class Server:
-
-    PAUSE_TIME = 0.1
 
     MESSAGES_TO_USER = {'AskGame': 'AG',
                         'WrongGame': 'WG',
@@ -30,6 +27,7 @@ class Server:
 
         self._player_list = {}
 
+    def start_server(self):
         self._server_FSM.handle_event(Event.START_PLAY)
 
     def connect_first_player(self):
@@ -101,7 +99,10 @@ class Server:
     def send(self, message, player):
         try:
             self._player_list[player].conn.sendall(message)
-            sleep(self.PAUSE_TIME)
+            ack = OnlineMessage()
+            ack.decode(self.get(player))
+            if ack.get_header() != 'ACK':
+                raise ValueError
         except ConnectionResetError:
             print("Connection terminated")
             for player in self._player_list.keys():

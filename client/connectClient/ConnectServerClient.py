@@ -44,6 +44,9 @@ class ConnectServerClient:
             if data == b'':
                 self._outputCon.server_close_connection()
                 exit()
+        except ConnectionAbortedError:
+            self._outputCon.breaking_connection_server()
+            exit()
         except ConnectionResetError:
             self._outputCon.breaking_connection_server()
             exit()
@@ -53,6 +56,9 @@ class ConnectServerClient:
 
         message = OnlineMessage()
         message.decode(data)
+        ack = OnlineMessage('ACK')
+        self.send(ack)
+
         self.parse(message)
 
     def send(self, message):

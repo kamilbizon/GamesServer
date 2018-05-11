@@ -2,6 +2,7 @@ from client.morelessClient.ConsoleMoreLessInput import ConsoleMoreLessInput
 from client.morelessClient.ConsoleMoreLessOutput import ConsoleMoreLessOutput
 from Message import OnlineMessage
 from time import sleep
+import socket
 
 
 class MoreLessClient:
@@ -39,9 +40,15 @@ class MoreLessClient:
         except ConnectionResetError:
             print("Breaking communication with the server")
             exit()
+        except socket.timeout:
+            print("No response")
+            exit()
 
         message = OnlineMessage()
         message.decode(data)
+        ack = OnlineMessage('ACK')
+        self.send(ack)
+
         self.parse(message)
 
     def send(self, message):

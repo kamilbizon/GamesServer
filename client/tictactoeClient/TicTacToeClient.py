@@ -1,6 +1,7 @@
 from client.tictactoeClient.ConsoleTicTacToeInput import ConsoleTicTacToeInput
 from client.tictactoeClient.ConsoleTicTacToeOutput import ConsoleTicTacToeOutput
 from Message import OnlineMessage
+from sys import exit
 from time import sleep
 import socket
 
@@ -45,9 +46,15 @@ class TicTacToeClient:
         except ConnectionResetError:
             print("Breaking communication with the server")
             exit()
+        except socket.timeout:
+            print("No response")
+            exit()
 
         message = OnlineMessage()
         message.decode(data)
+        ack = OnlineMessage('ACK')
+        self.send(ack)
+
         self.parse(message)
 
     def send(self, message):
@@ -56,9 +63,6 @@ class TicTacToeClient:
             sleep(self.PAUSE_TIME)
         except ConnectionResetError:
             print("Breaking communication with the server")
-            exit()
-        except socket.timeout:
-            print("No response")
             exit()
 
     def parse(self, message):
