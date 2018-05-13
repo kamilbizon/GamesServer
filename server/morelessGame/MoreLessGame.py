@@ -3,29 +3,33 @@ from random import randrange
 
 
 class MoreLessGame:
-    players = ['0', '1']
 
     def __init__(self, server):
         self._TCP = MoreLessTCP(server)
+        self._min_range = None
+        self._max_range = None
+        self._num_to_guess = None
+
+    def set_min_range(self):
+        while self._min_range is None:
+            self._TCP.ask_min_range()
+            self._min_range = self._TCP.get_min_range()
+            if self._min_range is None:
+                self._TCP.wrong_min_range()
+
+    def set_max_range(self):
+        while self._max_range is None:
+            self._TCP.ask_max_range()
+            self._max_range = self._TCP.get_max_range(self._min_range)
+            if self._max_range is None:
+                self._TCP.wrong_max_range(self._min_range)
 
     def start_game(self):
         self._TCP.welcome()
 
-        self.min_range = None
-        while self.min_range is None:
-            self._TCP.ask_min_range()
-            self.min_range = self._TCP.get_min_range()
-            if self.min_range is None:
-                self._TCP.wrong_min_range()
-
-        self.max_range = None
-        while self.max_range is None:
-            self._TCP.ask_max_range()
-            self.max_range = self._TCP.get_max_range(self.min_range)
-            if self.max_range is None:
-                self._TCP.wrong_max_range(self.min_range)
-
-        self._num_to_guess = randrange(self.min_range, self.max_range + 1)
+        self.set_min_range()
+        self.set_max_range()
+        self._num_to_guess = randrange(self._min_range, self._max_range + 1)
 
         is_end = False
         while not is_end:
@@ -36,9 +40,9 @@ class MoreLessGame:
         self._TCP.ask_player_guess()
         player_guess = None
         while player_guess is None:
-            player_guess = self._TCP.get_guess(self.min_range, self.max_range)
+            player_guess = self._TCP.get_guess(self._min_range, self._max_range)
             if player_guess is None:
-                self._TCP.wrong_guess(self.min_range, self.max_range)
+                self._TCP.wrong_guess(self._min_range, self._max_range)
         return player_guess
 
     def player_guess(self):

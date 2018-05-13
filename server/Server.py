@@ -3,7 +3,7 @@ from Message import OnlineMessage
 from server.ServerTransitionFSM import ServerTransitionFSM
 from server.ServerTransitionFSM import Event
 from server.tictactoeGame.TicTacToeGameOnline import TicTacToeGame
-from server.morelessGame.MoreLessOnline import MoreLessGame
+from server.morelessGame.MoreLessGame import MoreLessGame
 import socket
 
 
