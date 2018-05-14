@@ -63,6 +63,32 @@ class TestMoreLessGame(unittest.TestCase):
         more_less_game._TCP.wrong_max_range.assert_called_once()
         self.assertEqual(10, more_less_game._max_range)
 
+    def test_get_player_guess(self):
+        temp = TemporaryTCPClass()
+        more_less_game = MoreLessGame(temp)
+
+        class TemporaryClassForGetPlayerGuessTest:
+            first_call = True
+
+            def get_guess_return_first_wrong_next_correct_value(self, min_range, max_range):
+                if self.first_call:
+                    self.first_call = False
+                    return None
+                else:
+                    return 6
+
+        tmp = TemporaryClassForGetPlayerGuessTest()
+
+        more_less_game._min_range = 2
+        more_less_game._max_range = 10
+
+        more_less_game._TCP.ask_player_guess = pass_function
+        more_less_game._TCP.get_guess = tmp.get_guess_return_first_wrong_next_correct_value
+        more_less_game._TCP.wrong_guess = Mock()
+
+        self.assertEqual(6, more_less_game.get_player_guess())
+        more_less_game._TCP.wrong_guess.assert_called_once()
+
     def test_player_guess_return_false_for_wrong_guess(self):
         temp = TemporaryTCPClass()
         more_less_game = MoreLessGame(temp)
