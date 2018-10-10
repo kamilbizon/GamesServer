@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/kamilbizon/GamesServer.svg?branch=master)](https://travis-ci.org/kamilbizon/GamesServer) [![Coverage Status](https://coveralls.io/repos/github/kamilbizon/GamesServer/badge.svg?branch=master)](https://coveralls.io/github/kamilbizon/GamesServer?branch=master)
 # Games Server
-This program is our implementation of simple server with games within console terminal by TCP connection using the python language. You can choose singleplayer More or Less or multiplayer Tic Tac Toe.
+This program is our implementation of simple client-server application with games within console terminal by TCP connection using the python language. You can choose singleplayer More or Less or multiplayer Tic Tac Toe.
 ## Installation
 To be able to use this program simply download the contents of [this directory](). To work properly this program
 requires that you have the [python interpreter](https://www.python.org/downloads/) installed too.
